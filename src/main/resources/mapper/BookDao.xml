@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blog.dao.BookDao">
+
+    <resultMap id="book" type="Book">
+        <id property="id" column="id"/>
+        <result property="bookName" column="book_name"/>
+        <result property="content" column="content"/>
+        <result property="readType" column="read_type"/>
+        <result property="addTime" column="add_time"/>
+        <result property="bookPicture" column="book_picture"/>
+        <result property="summary" column="summary"/>
+    </resultMap>
+
+    <select id="findAllBook" resultMap="book">  /*后台图书展示*/
+        select * from t_book
+    </select>
+
+    <select id="findBookById" resultMap="book">
+        select * from t_book  where id = #{id}
+    </select>
+
+    <delete id="deleteBook">
+        delete from t_book where id = #{id}
+    </delete>
+
+    <select id="findDetailBook" resultMap="book">
+        select * from t_book where id = #{id}
+    </select>
+
+
+    <update id="updateBook" parameterType="Book">
+        update t_book set book_name = #{bookName}, content = #{content}, read_type = #{readType},
+                          book_picture = #{bookPicture} , summary = #{summary} , add_time = #{addTime}
+                          where id = #{id};
+    </update>
+
+    <insert id="saveBook" parameterType="Book" useGeneratedKeys="true" keyProperty="id">
+        insert into t_book (book_name, content, book_picture, read_type,
+                            add_time, summary)
+        values (#{bookName}, #{content}, #{bookPicture}, #{readType}, #{addTime}, #{summary});
+    </insert>
+
+    <select id="searchBookByName" resultMap="book">
+        select * from t_book where book_name like CONCAT('%',#{name},'%')
+    </select>
+
+
+</mapper>

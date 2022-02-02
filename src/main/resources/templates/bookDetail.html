@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--移动端更好的适应-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/semantic/semantic.min.css">
+    <link rel="stylesheet" href="/css/typo.css">
+    <link rel="stylesheet" href="/css/my.css">
+    <link rel="stylesheet" href="/css/my.css">
+    <link rel="stylesheet" href="/lib/prism/prism.css">
+    <link rel="stylesheet" href="/lib/tocbot/tocbot.css">
+    <title>阅读详情</title>
+</head>
+<body>
+    <!--导航开始--------------------------------------------->
+    <nav th:replace="_fragments :: menu(0)" class="ui inverted attached segment m-padded-mini m-shadow-small">
+
+    </nav>
+    <!--导航结束---------------------------------------------->
+
+
+    <!--中间内容开始------------------------------------------>
+    <div id="waypoint" class="m-container-small m-padded-large main-content">
+        <div class="ui container animated bounceInLeft">
+            <!--中间内容头部信息开始-->
+            <div class="ui top attached segment">
+                <div class="ui horizontal link list">
+                    <div class="item">
+                        <i class="calendar icon"></i><span th:text="${#dates.format(book.addTime, 'yyyy-MM-dd')}">2020-10-22</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui attached padded segment">
+                <div class="ui right aligned basic segment">
+                    <div class="ui blue basic label" th:text="${book.readType}">转载</div>
+                </div>
+                <div id="goto" class="ui attached negative message">
+                    <div class="ui middle aligned grid">
+                        <div class="eleven wide column">
+                            <p>若信息有误请联系管理员。</p>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="ui center aligned header" th:text="${book.bookName}">关于刻意练习的清单</h2>
+                <!--博客具体内容-->
+                <div id="m-id-content" class="typo typo-selection js-toc-content m-padded-left-right-responsive m-padded-large" th:utext="${book.content}">
+
+                </div><br>
+
+            </div>
+            </div>
+        </div>
+    </div>
+    <!--中间内容结束------------------------------------------>
+
+
+    <!-- 右边小工具条开始  ---------------->
+    <div id="toolbar" class="m-padded-all m-fixed m-right-bottom" style="display: none;">
+        <div class="ui vertical icon buttons ">
+            <div id="toTop-button" class="ui icon button"><i class="chevron up icon"></i> 回到首部</div>
+        </div> 
+    </div>
+    <div class="ui toc-comtainer flowing popup transition hidden" style="width: 300px !important;">
+        <ol class="js-toc">
+            
+        </ol>
+    </div>
+    <div id="qrcode" class="ui wechatRead flowing popup transition hidden" style="width: 130px !important">
+        <!-- <img src="./static/images/wechat.png" class="ui rounded image" style="width: 100px" /> -->
+    </div>
+    <!-- 右边小工具条结束  ---------------->
+
+    <!--底部内容开始-->
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-massive">
+
+    </footer>
+    <!--底部内容结束------------------------------------------>
+
+<script src="/dist/jquery/jquery-3.4.1.min.js"></script>
+<script src="/dist/semantic/semantic.min.js"></script>
+<script src="/lib/scrollTo/scrollTo.min.js"></script>
+<script src="/lib/prism/prism.js"></script>
+<script src="/lib/tocbot/tocbot.js"></script>
+<script src="/lib/qrcode/qrcode.min.js"></script>
+<script src="/lib/waypoints/waypoints.min.js"></script>
+<script>
+    $('.m-menu.m-toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.toc-button').popup({
+       popup : $('.toc-comtainer.popup'),
+        on : 'click',
+        position: 'left center'
+    });
+
+
+    $('#toTop-button').click(function() {
+        $(window).scrollTo(0,800);
+    });
+</script>
+</body>
+</html>

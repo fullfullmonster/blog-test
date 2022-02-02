@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <title>关于</title>
+</head>
+<body>
+    <!--导航开始--------------------------------------------->
+    <nav th:replace="_fragments :: menu(4)"  class="ui inverted attached segment m-padded-mini m-shadow-small" >
+    </nav>
+    <!--导航结束---------------------------------------------->
+
+
+    <!--中间内容开始------------------------------------------>
+    <div class="m-container m-padded-large main-content">
+        <div class="ui container">
+            <div class="ui stackable grid">
+                <div class="eleven wide column">
+                    <div class="ui grey segment">
+                        <img th:src="@{/images/about.jpg}" src="../static/images/test1.jpg" alt="" class="ui rounded image" />
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <div class="ui top grey attached segment">
+                        <div class="ui center aligned header">关于高校博客</div>
+                    </div>
+                    <div class="ui attached segment">
+                        <p class="m-text">厚德 弘毅</p>
+                        <p class="m-text">求是 笃行</p>
+                    </div>
+                    <div class="ui attached segment">
+                        <p class="m-text"></p>
+                        <div class="ui orange left pointing basic label m-margin-bottom-small">校园生活</div>
+                        <div class="ui orange left pointing basic label m-margin-bottom-small">好书推荐</div>
+                        <div class="ui orange left pointing basic label m-margin-bottom-small">互助交流</div>
+                        <div class="ui orange left pointing basic label m-margin-bottom-small">信息共享</div>
+                    </div>
+                    <div class="ui attached segment">
+                        <div class="ui teal left pointing basic label m-margin-bottom-small">通信</div>
+                        <div class="ui teal left pointing basic label m-margin-bottom-small">计算机科学与技术</div>
+                        <div class="ui teal left pointing basic label m-margin-bottom-small">微电子</div>
+                        <div class="ui teal left pointing basic label m-margin-bottom-small">数学</div>
+                        <div class="ui teal left pointing basic label m-margin-bottom-small">物理</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--中间内容结束------------------------------------------>
+    <br>
+    <!--底部内容开始-->
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-massive">
+
+    </footer>
+    <!--底部内容结束------------------------------------------>
+
+
+<script src="/dist/jquery/jquery-3.4.1.min.js"></script>
+<script src="/dist/semantic/semantic.min.js"></script>
+<script>
+    $('.m-menu.m-toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.wechat').popup({
+       popup : $('.wechatQR'),
+        on : 'hover',
+        position: 'bottom center'
+    });
+    $('.qq').popup();
+    
+
+</script>
+</body>
+</html>

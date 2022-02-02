@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>阅读</title>
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: menu(3)" class="ui inverted attached segment m-padded-mini" >
+
+</nav>
+<!--中间-->
+<br>
+<br>
+<div  class="m-container m-padded-tb-big animated fadeIn main-content">
+    <div class="ui container">
+        <div class="ui stackable grid">
+            <!--左边博客列表-->
+            <div class="wide column">
+                <!--header-->
+                <div class="ui top attached segment">
+                    <div class="ui middle aligned two column grid">
+                        <div class="column">
+                            <h3 class="ui grey header">阅读</h3>
+                        </div>
+                        <div class="right aligned column">
+                            共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${pages.total}"> 14 </h2> 篇
+                        </div>
+                    </div>
+                </div>
+
+                <!--content-->
+                <div class="ui attached segment"  th:each="book : ${pages.list}">
+                    <div class="ui grid">
+                        <div class="books-list right aligned three wide column" >
+                            <img src="https://i.loli.net/2021/06/20/spPm5hdIlLkcbqu.jpg">
+                        </div>
+                        <div class="right aligned">
+                            <br>
+                            <p href="#" class="ui blue basic label m-padded-tiny m-text-thin" th:text="${book.readType}"></p>
+                        </div>
+                        <div class="right eleven wide column">
+                            <h2 class="ui header" >
+                                <a href="#" th:href="@{/book/{id}(id=${book.id})}" target="_blank" class="m-black" th:text="${book.bookName}">遥远的星辰</a></h2>
+                            <p class="m-text" th:text="|${book.summary}......|">作者波拉尼奥</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--footer-->
+                <div class="ui bottom attached segment" >
+                    <div class="ui middle aligned two column grid">
+                        <div class="column">
+                            <div class="item"><a class="ui mini grey basic button" th:href="@{/(pageNum=${pages.hasPreviousPage}?${pages.prePage}:1)}">上一页</a></div>
+                        </div>
+                        <div class="right aligned column">
+                            <div class="item"><a class="ui mini grey basic button" th:href="@{/(pageNum=${pages.hasNextPage}?${pages.nextPage}:${pages.pages})}">下一页</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui segment m-inline-block">
+                    <p >当前第<span th:text="${pages.pageNum}"></span>页，总<span th:text="${pages.pages}"></span>页，共<span th:text="${pages.total}"></span>条记录</p>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<br>
+<br>
+<!--底部-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-large" >
+
+</footer>
+
+<script src="/dist/jquery/jquery-3.4.1.min.js"></script>
+<script src="/dist/semantic/semantic.min.js"></script>
+<script>
+    $('.m-menu.m-toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <!--移动端更好的适应-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">详情</title>
+    <link rel="stylesheet" href="/dist/semantic/semantic.min.css" th:href="@{/dist/semantic/semantic.min.css}">
+    <link rel="stylesheet" href="/css/typo.css" th:href="@{/css/typo.css}">
+    <link rel="stylesheet" href="/css/my.css" th:href="@{/css/my.css}">
+    <link rel="stylesheet" href="/css/my.css" th:href="@{/css/book.css}">
+    <link rel="stylesheet" href="/css/animate.css" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" href="/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+    <link rel="stylesheet" href="/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+</head>
+<body>
+    <nav th:fragment="menu(n)" class="ui attached segment m-padded-mini" >
+        <div class="ui container"></div>
+        <div class="ui grey secondary huge menu" >
+            <h2 class="ui grey header item">博客</h2>
+            <a href="#" class="item" th:href="@{/}" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>首页</a>
+            <a href="#" class="item" th:href="@{/archives}" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>归档</a>
+            <a href="#" class="item" th:href="@{/book}" th:classappend="${n==3} ? 'active'"><i class="book icon"></i>阅读</a>
+            <a href="#" class="item" th:href="@{/about}" th:classappend="${n==4} ? 'active'"><i class="info icon"></i>关于</a>
+
+            <div class="right item">
+                <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+                    <div class="ui icon transparent input">
+                        <input th:value="${query}" type="text" name="query" placeholder="Search...">
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+</nav>
+
+    <footer th:fragment="footer" class="ui inverted vertical segment m-padded-large" >
+        <div class="ui center aligned container">
+            <div class="ui inverted divided grid m-footer-text">
+                <div class="eight wide column m-footer-text-opacity" >
+                    <div class="ui">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="eight wide column" >
+                    <p class="m-footer-text-opacity">copyright@-----------------------------------------------------</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

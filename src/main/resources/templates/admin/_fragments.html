@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)"> <!--title为传参-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">博客详情</title>
+    <link rel="stylesheet" href="/dist/semantic/semantic.min.css" th:href="@{/dist/semantic/semantic.min.css}">
+    <link rel="stylesheet" href="/css/typo.css" th:href="@{/css/typo.css}">
+    <link rel="stylesheet" href="/css/my.css" th:href="@{/css/my.css}">
+    <link rel="stylesheet" href="/css/animate.css" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" href="/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+    <link rel="stylesheet" href="/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+</head>
+<body>
+
+<nav th:fragment="menu(n)" class="ui attached segment m-padded-mini m-shadow-small" >
+    <div class="ui container">
+        <div class="ui grey secondary huge menu" >
+            <h2 class="ui grey header item">管理后台</h2>
+            <a href="#" class="item" th:href="@{/admin/blogs}" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>博客</a>
+<!--            <a href="#" class="item" th:href="@{/admin/types}" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>分类</a>-->
+            <a href="#" class="item" th:href="@{/admin/book}" th:classappend="${n==3} ? 'active'"><i class="info icon"></i>图书</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <img class="ui avatar image" src="/images/about.jpg">
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+</nav>
+
+
+<footer th:fragment="footer" class="ui inverted vertical segment m-padded-large" >
+    <div class="ui center aligned container">
+        <div class="ui inverted divided grid m-footer-text">
+            <div class="eight wide column m-footer-text-opacity" >
+                <div class="ui">
+                    <p></p>
+                </div>
+            </div>
+            <div class="eight wide column" >
+                <p class="m-footer-text-opacity">copyright@-----------------------------------------------------</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<th:block th:fragment="script">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
+</th:block>
+
+</body>
+</html>

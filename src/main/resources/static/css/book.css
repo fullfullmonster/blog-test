@@ -1,0 +1,9 @@
+.stage{
+    position: relative;
+    margin: 100px;
+}
+
+.books-list img{
+    width: 100px !important;
+    height: 134px !important;
+}

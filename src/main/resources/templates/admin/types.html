@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--移动端更好的适应-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/semantic/semantic.min.css">
+    <link rel="stylesheet" href="/css/my.css">
+    <title>分类管理</title>
+</head>
+<body>
+    <!--导航开始--------------------------------------------->
+    <nav th:replace="admin/_fragments :: menu(2)" class="ui inverted attached segment m-padded-mini m-shadow-small" >
+
+    </nav>
+
+    <!--导航结束---------------------------------------------->
+
+
+    <!--中间内容开始------------------------------------------>
+    <div class="m-container-small m-padded-large main-content">
+        <div class="ui container">
+
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="type : ${pages.list}">
+                    <td th:text="${type.name}">刻意练习清单</td>
+                    <td>
+                        <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini teal basic button">编辑</a>
+                        <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" id="delete" onclick="return confirm('如果删除将会附带博客一起删除，您确定要删除吗？')" class="ui mini red basic button">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="6" >
+                        <div class="ui menu pagination" >
+                            <div class="item"><a th:href="@{/admin/types}">首页</a></div>
+                            <div class="item"><a th:href="@{/admin/types(pageNum=${pages.hasPreviousPage}?${pages.prePage}:1)}">上一页</a></div>
+                            <div class="item"><a th:href="@{/admin/types(pageNum=${pages.hasNextPage}?${pages.nextPage}:${pages.pages})}">下一页</a></div>
+                            <div class="item"><a th:href="@{/admin/types(pageNum=${pages.pages})}">尾页</a></div>
+                        </div>
+                        <div class="ui mini segment m-inline-block">
+                            <p>当前第<span th:text="${pages.pageNum}"></span>页，总<span th:text="${pages.pages}"></span>页，共<span th:text="${pages.total}"></span>条记录</p>
+                        </div>
+                        <a href="#" th:href="@{/admin/types/input}"  class="ui mini right floated purple basic button">新增</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+    <br>
+
+
+    <footer th:replace="admin/_fragments :: footer" >
+
+    </footer>
+<script src="/dist/jquery/jquery-3.4.1.min.js"></script>
+<script src="/dist/semantic/semantic.min.js"></script>
+<script>
+    $('.m-menu.m-toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+</script>
+</body>
+</html>

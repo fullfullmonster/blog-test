@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--移动端更好的适应-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/semantic/semantic.min.css">
+    <link rel="stylesheet" href="/css/my.css">
+    <title>归档</title>
+</head>
+<body>
+    <!--导航开始--------------------------------------------->
+    <nav  th:replace="_fragments :: menu(2)"  class="ui inverted attached segment m-padded-mini m-shadow-small" >
+
+    </nav>
+    <!--导航结束---------------------------------------------->
+
+
+    <!--中间内容开始------------------------------------------>
+    <div class="m-container-small m-padded-large main-content">
+        <div class="ui container">
+            <!--中间内容上面的导航开始 ---->
+            <div class="ui top attached padded segment">
+                <div class="ui middle aligned two column grid">
+                    <div class="column">
+                        <h3 class="ui grey header">归档</h3>
+                    </div>
+                    <div class="right aligned column">
+                        共 <h2 class="ui blue header m-inline-block m-text-thin"  th:text="${blogCount}"> 114 </h2> 篇博客
+                    </div>
+                </div>
+            </div>
+            <!--中间内容上面的导航结束 ---->
+
+            <!-- 中间内容具体内容开始 -->
+            <div class="ui grey segment">
+                <th:block th:each="item : ${archiveMap}">
+                    <h3 class="ui center aligned header" th:text="${item.key}">2017</h3>
+                    <div class="ui fluid vertical menu">
+                        <a href="#" th:each="blog : ${item.value}" th:href="@{/blog/{id}(id=${blog.id})}"
+                           target="_blank" class="item">
+                        <span>
+                            <i class="mini black circle icon"></i>&nbsp;&nbsp;<span th:text="${blog.title}">关于刻意练习的清单</span>
+                            <div class="ui blue basic left pointing label m-padded-mini"
+                                 th:text="|${#dates.format(blog.updateTime,'dd')}号|">9月03日</div>
+                        </span>
+                            <div class="ui orange basic left pointing label m-padded-mini" th:text="${blog.flag}">原创
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
+            
+            <!-- 中间内容具体内容结束 -->
+        </div> 
+    </div>
+    <!--中间内容结束------------------------------------------>
+    <br>
+    <!--底部内容开始-->
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-massive">
+    </footer>
+    <!--底部内容结束------------------------------------------>
+
+
+<script src="/dist/jquery/jquery-3.4.1.min.js"></script>
+<script src="/dist/semantic/semantic.min.js"></script>
+<script>
+    $('.m-menu.m-toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+</script>
+</body>
+</html>

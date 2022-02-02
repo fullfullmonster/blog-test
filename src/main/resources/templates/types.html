@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--移动端更好的适应-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/dist/semantic/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/my.css">
+    <title>分类</title>
+</head>
+<body>
+    <!--导航开始--------------------------------------------->
+    <nav th:replace="_fragments :: menu(2)" class="ui inverted attached segment m-padded-mini m-shadow-small" >
+    </nav>
+    <!--导航结束---------------------------------------------->
+
+
+    <!--中间内容开始------------------------------------------>
+    <div class="m-container-small m-padded-large main-content">
+        <div class="ui container">
+            <!--中间内容上面的导航开始 ---->
+            <div class="ui top attached segment">
+                <div class="ui middle aligned two column grid">
+                    <div class="column">
+                        <h3 class="ui grey header">分类</h3>
+                    </div>
+                    <div class="right aligned column">
+                        共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(types)}"> 14 </h2> 个
+                    </div>
+                </div>
+            </div>
+            <!--中间内容上面的导航结束 ---->
+
+            <!-- 中间内容 标签的具体内容开始 -->
+            <div class="ui attached segment m-padded-large">
+                <div class="ui labeled button m-margin-small" th:each="type : ${types}">
+                    <a href="#" class="ui basic pink button" th:href="@{/types/{id}(id=${type.id})}"  th:classappend="${type.id==activeTypeId} ? 'violet'" th:text="${type.name}">思考与感悟</a>
+                    <div class="ui basic pink left pointing label" th:classappend="${type.id==activeTypeId} ? 'violet'" th:text="${#arrays.length(type.blogs)}">24</div>
+                </div>
+
+            </div>
+            <!-- 中间内容 标签的具体内容结束 -->
+
+            <!-- 中间内容 选中标签的内容开始 -->
+            <div class="ui top attached grey segment">
+                <div class="ui padded segment vertical m-padded-big m-mobile-lr-clear" th:each="blog : ${pageInfo.list}">
+                    <div class="ui mobile reversed stackable grid">
+                        <div class="eleven wide column">
+                            <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗?</a></h3>
+                            <p class="m-text" th:text="|${blog.description}......|">&nbsp;&nbsp;&nbsp;最近学习了一下JVM的内存模型，本来想自己写一篇学习心得，总是觉得自己表达不清，然后就从学习资料里复制一段，写到最后发现，基本都是复制的写到最后发现，基本都是复制的</p>
+                            <div class="ui stackable grid">
+                                <div class="eleven wide column">
+                                    <div class="ui mini horizontal link list">
+                                        <div class="item">
+                                            <img src="/images/test1.jpg" alt="" class="ui avatar image" >
+                                            <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">撑撑怪</a></div>
+                                        </div>
+                                        <div class="item">
+                                            <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2020-3-02</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="eye icon"></i> <span th:text="${blog.views}">2342</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right aligned five wide column">
+                                    <a href="#" target="_blank" class="ui grey basic m-padded-all-mini m-text-thin label"  th:text="${blog.type.name}">学习笔记</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="five wide column">
+                            <a href="#" target="_blank">
+                                <img src="../static/images/test2.jpg"  th:src="@{${blog.firstPicture}}" alt="" class="ui rounded m-image-size-square image">
+                            </a>
+                        </div>
+                    </div>
+                </div>                
+
+            </div>
+            <!-- 中间内容 选中标签的内容结束 -->
+            <!-- 中间内容底部的翻页效果开始 --->
+                <div class="ui bottom attached segment">
+                    <div class="ui middle aligned two column grid">
+                        <div class="column">
+                            <a href="#" class="ui mini grey basic button"  th:href="@{/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+                        </div>
+                        <div class="right aligned column">
+                            <a href="#" class="ui mini grey basic button" th:href="@{/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 中间内容底部的翻页效果结束 --->
+            <div class="ui segment m-inline-block">
+                <p >当前第<span th:text="${pageInfo.pageNum}"></span>页，总<span th:text="${pageInfo.pages}"></span>页，共<span th:text="${pageInfo.total}"></span>条记录</p>
+            </div>
+        </div>
+    </div>
+    <!--中间内容结束------------------------------------------>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-massive">
+    </footer>
+    <!--底部内容结束------------------------------------------>
+
+
+<script src="/dist/jquery/jquery-3.4.1.min.js"></script>
+<script src="/dist/semantic/semantic.min.js"></script>
+<script>
+    $('.m-menu.m-toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+</script>
+</body>
+</html>
